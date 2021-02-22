@@ -29,6 +29,10 @@
 5.ShowMap.h&&ShowMap.c，这个模块设计了与界面有关的函数
 
 
+
+ps:大一的时候可真美好啊，当时为了实现一个项目熬夜写一个星期都觉得累，反而单人完成项目之后还异常兴奋，有种难言的喜悦感，也挺佩服当时的自己的，一个人捣鼓了2000多行代码，不过还好当初做了亿点点注释，不然现在都看不懂了哈哈，代码部分繁琐，但我还是没改，毕竟也是当年的心血啊。
+
+
 /The freshman made, C language, to achieve the landing, document reading and writing, as well as two subsystems, which respectively include student achievement management and student information management, specific functions can see the function diagram.
 
 Window:
