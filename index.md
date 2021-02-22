@@ -25,7 +25,10 @@
 
 5.ShowMap.h&&ShowMap.c，这个模块设计了与界面有关的函数
 
-/The freshman made, C language, to achieve the landing, document reading and writing, as well as two subsystems, which respectively include student achievement management and student information management, specific functions can see the function diagram.
+
+Speak in English:
+
+The freshman made, C language, to achieve the landing, document reading and writing, as well as two subsystems, which respectively include student achievement management and student information management, specific functions can see the function diagram.
 
 Window:
 
@@ -51,4 +54,4 @@ Core2.H && Core2.C, this module is designed to the core operation related to the
 
 4.Input.h&&Input.c. This module has a custom Input so that all inputs use getch(not supported under VS, instead of gettch), so that it is possible to check if the Input is valid at the time of Input
 
-5.ShowMap.h&&ShowMap.c. This module designs functions related to the interface/
+5.ShowMap.h&&ShowMap.c. This module designs functions related to the interface
