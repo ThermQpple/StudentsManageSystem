@@ -3,13 +3,13 @@
 #include <windows.h>
 #include"../Headers/Core1.h"
 //extern char filebuffer1[88],filebuffer2[88];
-//ÕâÀï¶¼ÊÇ¹ØÓÚavlÊıµÄ²Ù×÷
+//è¿™é‡Œéƒ½æ˜¯å…³äºavlæ•°çš„æ“ä½œï¼Œä¸ä¼šçš„è¯å¯ä»¥æ¶è¡¥ä¸€ä¸‹
 static int maxx(int x,int y)
 {
     return x>y?x:y;
 }
 
-/*ÓÃÒÔ¼ÆËã¸ß¶ÈµÄº¯Êı*/
+/*ç”¨ä»¥è®¡ç®—é«˜åº¦çš„å‡½æ•°*/
 static int high(struct menu1 *p)
 {
     if (p == NULL)
@@ -18,8 +18,8 @@ static int high(struct menu1 *p)
         return p->height;
 }
 
-/*LLĞÍĞı×ª*/
-struct menu1* singleft(struct menu1 *k2)  //×óµ¥Ğı  LL
+/*LLå‹æ—‹è½¬*/
+struct menu1* singleft(struct menu1 *k2)  //å•æ—‹  LL
 {
     struct menu1 *k1 = k2->left;
     k2->left = k1->right;
@@ -29,8 +29,8 @@ struct menu1* singleft(struct menu1 *k2)  //×óµ¥Ğı  LL
     return k1;
 }
 
-/*RRĞÍĞı×ª*/
-struct menu1* singright(struct menu1 *k2)  //ÓÒµ¥Ğı RR
+/*RRå‹æ—‹è½¬*/
+struct menu1* singright(struct menu1 *k2)  //å•æ—‹ RR
 {
     struct menu1 *k1 = k2->right;
     k2->right = k1->left;
@@ -40,29 +40,30 @@ struct menu1* singright(struct menu1 *k2)  //ÓÒµ¥Ğı RR
     return k1;
 }
 
-struct menu1* doubleleft(struct menu1 *k3)   //×óË«Ğı LR ºËĞÄ²Ù×÷ LRL(×óº¢×ÓÓÒµ¥Ğı£¬±¾Éí×óµ¥Ğı)
+struct menu1* doubleleft(struct menu1 *k3)   //åŒæ—‹ LR æ ¸å¿ƒæ“ä½œ LRL(å·¦å­©å­å³å•æ—‹ï¼Œæœ¬èº«å·¦å•æ—‹)
 {
     k3->left = singright(k3->left);
     return singleft(k3);
 }
 
-struct menu1* doubleright(struct menu1 *k3)  //ÓÒË«Ğı RL ºËĞÄ²Ù×÷ RLR
+struct menu1* doubleright(struct menu1 *k3)  //åŒæ—‹ RL æ ¸å¿ƒæ“ä½œ RLR
 {
     k3->right = singleft(k3->right);
     return singright(k3);
 }
 
-/*ÓÃÒÔ¼ÇÂ¼ÏµÍ³Ò»Êı¾İµÄº¯Êı£¬²¢Î´±£´æÖÁÎÄ¼şÖĞ£¬²ÉÓÃµİ¹éÊµÏÖ*/
-struct menu1* Record_1 (struct menu1 *ph,char a[],char b[],char c[],char d[])//abcd¶ÔÓÚÑ§ºÅĞÕÃûÁªÏµËŞÉá
+/*ç”¨ä»¥è®°å½•ç³»ç»Ÿä¸€æ•°æ®çš„å‡½æ•°ï¼Œå¹¶æœªä¿å­˜è‡³æ–‡ä»¶ä¸­ï¼Œé‡‡ç”¨é€’å½’å®ç°*/
+struct menu1* Record_1 (struct menu1 *ph,char a[],char b[],char c[],char d[])//abcdå¯¹äºå­¦å·å§“åè”ç³»å®¿èˆ
 {
     if (ph == NULL)
     {
         ph = (struct menu1*)malloc(sizeof(struct menu1));
         if (ph == NULL)
         {
-            MessageBox(NULL,TEXT("³ÌĞòÒì³£±ÀÀ£"),TEXT("sorry!"),0);
+            MessageBox(NULL,TEXT("ç¨‹åºå¼‚å¸¸å´©æºƒ"),TEXT("sorry!"),0);//æç¤ºé”™è¯¯
             exit(0);
         }
+        //æŒ‡é’ˆå¤åˆ¶ä¸èƒ½ç”¨ç­‰äº
         strcpy(ph->sn,a);
         strcpy(ph->name,b);
         strcpy(ph->chat,c);
@@ -71,9 +72,9 @@ struct menu1* Record_1 (struct menu1 *ph,char a[],char b[],char c[],char d[])//a
         ph->left=NULL;
         ph->right=NULL;
     }
-    else if (strcmp(a,ph->sn)<0)
+    else if (strcmp(a,ph->sn)<0)//äºŒå‰æ ‘å¯¹æ€§è´¨
     {
-        ph->left = Record_1(ph->left,a,b,c,d);
+        ph->left = Record_1(ph->left,a,b,c,d);//é€’å½’æ„é€ 
         if (high(ph->left)-high(ph->right) == 2)
         {
             if (strcmp(a,ph->left->sn)<0)
@@ -93,16 +94,16 @@ struct menu1* Record_1 (struct menu1 *ph,char a[],char b[],char c[],char d[])//a
                 ph = doubleright(ph);
         }
     }
-    else if(strcmp(a,ph->sn) == 0)//¼ìË÷Ñ§ºÅÖØ¸´
+    else if(strcmp(a,ph->sn) == 0)//æ£€ç´¢å­¦å·é‡å¤
     {
-        printf ("ÄúÊäÈëµÄÑ§ºÅÓĞÖØ¸´!ÇëÄú¼ì²é²¢ÖØĞÂ²Ù×÷ ");
+        printf ("æ‚¨è¾“å…¥çš„å­¦å·æœ‰é‡å¤!è¯·æ‚¨æ£€æŸ¥å¹¶é‡æ–°æ“ä½œ ");
         return ph;
     }
     ph->height = max(high(ph->left),high(ph->right))+1;
     return ph;
 }
 
-/*²é¿´ĞÅÏ¢£¬ÖĞĞò±éÀú*/
+/*æŸ¥çœ‹ä¿¡æ¯ï¼Œä¸­åºéå†*/
 struct menu1* Seeit_1 (struct menu1 *head)
 {
     struct menu1 *p = head;
@@ -116,16 +117,16 @@ struct menu1* Seeit_1 (struct menu1 *head)
     return head;
 }
 
-/*É¾³ı½Úµãº¯Êı£¬µİ¹éÊµÏÖ*/
-struct menu1* Delete_1 (struct menu1 *p,char x[])//x±íÑ§ºÅ
+/*åˆ é™¤èŠ‚ç‚¹å‡½æ•°ï¼Œé€’å½’å®ç°---æ‰¾åˆ°æ›¿ä»£èŠ‚ç‚¹ï¼Œé€’å½’åˆ é™¤è¯¥èŠ‚ç‚¹*/
+struct menu1* Delete_1 (struct menu1 *p,char x[])//xè¡¨å­¦å·
 {
     if (!p)
-        printf ("¸ÃÑ§Éú²»´æÔÚ!\n");
+        printf ("è¯¥å­¦ç”Ÿä¸å­˜åœ¨!\n");
     else
     {
         if (strcmp(x,p->sn)<0)
         {
-            p->left = Delete_1(p->left,x);
+            p->left = Delete_1(p->left,x);//é€’å½’è¿‡ç¨‹
             if (abs(high(p->left)-high(p->right))==2)
             {
                 if (high(p->left->left)>high(p->left->right))
@@ -148,12 +149,12 @@ struct menu1* Delete_1 (struct menu1 *p,char x[])//x±íÑ§ºÅ
         else
         {
             struct menu1 *ph;
-            if (p->left&&p->right)/*¿ÉÒÔÕÒµ½½Ï¸ßµÄ×ÓÊ÷ÖĞ·ûºÏµÄ½ÚµãÌæ´ú£¬ÕâÑù¿ÉÒÔ¼õÉÙĞı×ªµÄ¿ªÏú*/
+            if (p->left&&p->right)/*å¯ä»¥æ‰¾åˆ°è¾ƒé«˜çš„å­æ ‘ä¸­ç¬¦åˆçš„èŠ‚ç‚¹æ›¿ä»£ï¼Œè¿™æ ·å¯ä»¥å‡å°‘æ—‹è½¬çš„å¼€é”€*/
             {
                 if (high(p->left)>=high(p->right))
                 {
                     ph = p->left;
-                    while (ph->right)//×ó×ÓÊ÷ÖĞ×î´ó½ÚµãÌæ´ú
+                    while (ph->right)//å·¦å­æ ‘ä¸­æœ€å¤§èŠ‚ç‚¹æ›¿ä»£
                         ph = ph->right;
                     strcpy(p->sn, ph->sn);
                     strcpy(p->name, ph->name);
@@ -164,7 +165,7 @@ struct menu1* Delete_1 (struct menu1 *p,char x[])//x±íÑ§ºÅ
                 else
                 {
                     ph = p->right;
-                    while (ph->left)//ÓÒ×ÓÊ÷ÖĞ×îÏÂ½ÚµãÌæ´ú
+                    while (ph->left)//å³å­æ ‘ä¸­æœ€ä¸‹èŠ‚ç‚¹æ›¿ä»£
                         ph = ph->left;
                     strcpy(p->sn, ph->sn);
                     strcpy(p->name, ph->name);
@@ -188,8 +189,8 @@ struct menu1* Delete_1 (struct menu1 *p,char x[])//x±íÑ§ºÅ
     return p;
 }
 
-/*²éÑ¯º¯Êı*/
-struct menu1* Find_1 (struct menu1 *head,char sp)//spÓÃÒÔ±íÊ¾Ñ¡ÔñÊ¹ÓÃÑ§ºÅ»¹ÊÇĞÕÃû
+/*æŸ¥è¯¢å‡½æ•°*/
+struct menu1* Find_1 (struct menu1 *head,char sp)//spç”¨ä»¥è¡¨ç¤ºé€‰æ‹©ä½¿ç”¨å­¦å·è¿˜æ˜¯å§“å
 {
     char s[52];
     struct menu1 *p=head,*queue[1000];
@@ -197,13 +198,13 @@ struct menu1* Find_1 (struct menu1 *head,char sp)//spÓÃÒÔ±íÊ¾Ñ¡ÔñÊ¹ÓÃÑ§ºÅ»¹ÊÇĞÕÃ
     queue[tail++] = head;
     if (p==NULL)
     {
-        printf ("ÔİÎŞÊı¾İ\n");
+        printf ("æš‚æ— æ•°æ®\n");
         return p;
     }
     switch(sp)
     {
     case '4':
-        printf ("ÇëÊäÈë¸ÃÉúµÄÑ§ºÅ  ");
+        printf ("è¯·è¾“å…¥è¯¥ç”Ÿçš„å­¦å·  ");
         strcpy(s,inputString(s,52));
         HideConsoleCursor();
         system("cls");
@@ -215,16 +216,16 @@ struct menu1* Find_1 (struct menu1 *head,char sp)//spÓÃÒÔ±íÊ¾Ñ¡ÔñÊ¹ÓÃÑ§ºÅ»¹ÊÇĞÕÃ
                 p=p->right;
             if (p==NULL)
             {
-                printf ("¶Ô²»Æğ£¬¸ÃÉú²»´æÔÚ\n");
+                printf ("å¯¹ä¸èµ·ï¼Œè¯¥ç”Ÿä¸å­˜åœ¨\n");
                 return p;
             }
         }
-        printf ("\t----------------------******************Ñ§ÉúĞÅÏ¢²é¿´*********************--------------------\n");
-        printf ("\t-------------Ñ§ºÅ---------------ĞÕÃû------------------ÁªÏµ·½Ê½-------------------ËŞÉáºÅ-----\n\n");
+        printf ("\t----------------------******************å­¦ç”Ÿä¿¡æ¯æŸ¥çœ‹*********************--------------------\n");
+        printf ("\t-------------å­¦å·---------------å§“å------------------è”ç³»æ–¹å¼-------------------å®¿èˆå·-----\n\n");
         printf ("\t\t     %-19s%-22s%-27s%-16s\n",p->sn,p->name,p->chat,p->dor);
         return p;
     case '6':
-        printf ("ÇëÊäÈë¸ÃÉúµÄĞÕÃû  ");
+        printf ("è¯·è¾“å…¥è¯¥ç”Ÿçš„å§“å  ");
         strcpy(s,inputString(s,52));
         HideConsoleCursor();
         system("cls");
@@ -239,68 +240,68 @@ struct menu1* Find_1 (struct menu1 *head,char sp)//spÓÃÒÔ±íÊ¾Ñ¡ÔñÊ¹ÓÃÑ§ºÅ»¹ÊÇĞÕÃ
         if (hea == tail)
         {
 
-            printf ("¶Ô²»Æğ£¬¸ÃÉú²»´æÔÚ\n");
+            printf ("å¯¹ä¸èµ·ï¼Œè¯¥ç”Ÿä¸å­˜åœ¨\n");
             return NULL;
 
         }
         else p = queue[hea];
-        printf ("\t----------------------******************Ñ§ÉúĞÅÏ¢²é¿´*********************--------------------\n");
-        printf ("\t-------------Ñ§ºÅ---------------ĞÕÃû------------------ÁªÏµ·½Ê½-------------------ËŞÉáºÅ-----\n");
+        printf ("\t----------------------******************å­¦ç”Ÿä¿¡æ¯æŸ¥çœ‹*********************--------------------\n");
+        printf ("\t-------------å­¦å·---------------å§“å------------------è”ç³»æ–¹å¼-------------------å®¿èˆå·-----\n");
         printf ("\t\t     %-19s%-22s%-27s%-16s\n",p->sn,p->name,p->chat,p->dor);
         return p;
     }
 }
 
-/*ĞŞ¸ÄÊı¾İº¯Êı*/
+/*ä¿®æ”¹æ•°æ®å‡½æ•°*/
 struct menu1* Change_1 (struct menu1 *head)
 {
     char sn1[52],ck;
     struct menu1 *p,*h = head;
-    printf ("ÄúĞèÒªÊäÈëÄúÏëÒªĞŞ¸ÄµÄÑ§ÉúµÄÑ§ºÅ\n");
+    printf ("æ‚¨éœ€è¦è¾“å…¥æ‚¨æƒ³è¦ä¿®æ”¹çš„å­¦ç”Ÿçš„å­¦å·\n");
     p = Find_1(head,'4');
     if (p == NULL)
     {
-        printf ("Çë°´ÈÎÒâ¼ü·µ»Ø");
+        printf ("è¯·æŒ‰ä»»æ„é”®è¿”å›");
         getch();
         return head;
     }
     while (1)
     {
-        printf ("Äú¿ÉÒÔÊäÈë 1 ÒÔĞŞ¸ÄÑ§ºÅ£¬ÊäÈë 2 ÒÔĞŞ¸ÄĞÕÃû£¬ÊäÈë 3 ÒÔĞŞ¸ÄÁªÏµ·½Ê½£¬ÊäÈë 4 ÒÔĞŞ¸ÄËŞÉáºÅ£¬ÊäÈë 0 ÒÔÍË³ö±¾´Î²Ù×÷\n");
+        printf ("æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥ä¿®æ”¹å­¦å·ï¼Œè¾“å…¥ 2 ä»¥ä¿®æ”¹å§“åï¼Œè¾“å…¥ 3 ä»¥ä¿®æ”¹è”ç³»æ–¹å¼ï¼Œè¾“å…¥ 4 ä»¥ä¿®æ”¹å®¿èˆå·ï¼Œè¾“å…¥ 0 ä»¥é€€å‡ºæœ¬æ¬¡æ“ä½œ\n");//äººæœºäº¤äº’
         ck = getch();
         switch (ck)
         {
         case '0':
             return head;
         case '1':
-            printf ("ÇëÊäÈëĞÂÑ§ºÅ ");
+            printf ("è¯·è¾“å…¥æ–°å­¦å· ");
             strcpy(p->sn,inputString(sn1,52));
-            printf ("²Ù×÷³É¹¦£¬Çë¼ÌĞø²Ù×÷\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œè¯·ç»§ç»­æ“ä½œ\n");
             break;
         case '2':
-            printf ("ÇëÊäÈëĞÂĞÕÃû ");
+            printf ("è¯·è¾“å…¥æ–°å§“å ");
             strcpy(p->sn,inputString(sn1,52));
-            printf ("²Ù×÷³É¹¦£¬Çë¼ÌĞø²Ù×÷\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œè¯·ç»§ç»­æ“ä½œ\n");
             break;
         case '3':
-            printf ("ÇëÊäÈëĞÂÁªÏµ·½Ê½ ");
+            printf ("è¯·è¾“å…¥æ–°è”ç³»æ–¹å¼ ");
             strcpy(p->sn,inputString(sn1,52));
-            printf ("²Ù×÷³É¹¦£¬Çë¼ÌĞø²Ù×÷\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œè¯·ç»§ç»­æ“ä½œ\n");
             break;
         case '4':
-            printf ("ÇëÊäÈëĞÂËŞÉáºÅ ");
+            printf ("è¯·è¾“å…¥æ–°å®¿èˆå· ");
             strcpy(p->sn,inputString(sn1,52));
-            printf ("²Ù×÷³É¹¦£¬Çë¼ÌĞø²Ù×÷\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œè¯·ç»§ç»­æ“ä½œ\n");
             break;
         default:
-            printf ("ÊäÈëµÄÊı×ÖÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+            printf ("è¾“å…¥çš„æ•°å­—æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
             break;
         }
     }
 
 }
 
-/*É¾³ıº¯ÊıµÄ½Ó¿Ú£¬½øÈëÉ¾³ı¹¦ÄÜ*/
+/*åˆ é™¤å‡½æ•°çš„æ¥å£ï¼Œè¿›å…¥åˆ é™¤åŠŸèƒ½*/
 struct menu1* EnterDelete_1(struct menu1 *head)
 {
     char sn1[52],c;
@@ -308,15 +309,15 @@ struct menu1* EnterDelete_1(struct menu1 *head)
     {
         ShowSeeit_1();
         Seeit_1(head);
-        printf ("Äú¿ÉÒÔÊäÈë 1 ÒÔ¼ÌĞøÉ¾³ı£¬2 ÒÔÈ«²¿É¾³ı£¬0 ÒÔ·µ»Ø²Ëµ¥\n");
+        printf ("æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥ç»§ç»­åˆ é™¤ï¼Œ2 ä»¥å…¨éƒ¨åˆ é™¤ï¼Œ0 ä»¥è¿”å›èœå•\n");
         c = getch();
         switch (c)
         {
         case '1':
-            printf ("ÇëÊäÈëÄúÏëÒªÉ¾³ıÑ§ÉúµÄÑ§ºÅ ");
+            printf ("è¯·è¾“å…¥æ‚¨æƒ³è¦åˆ é™¤å­¦ç”Ÿçš„å­¦å· ");
             strcpy(sn1,inputString(sn1,52));
             head = Delete_1 (head,sn1);
-            printf ("±¾´Î²Ù×÷½áÊø£¬ÇëÊäÈëÈÎÒâ¼ü¼ÌĞø... ");
+            printf ("æœ¬æ¬¡æ“ä½œç»“æŸï¼Œè¯·è¾“å…¥ä»»æ„é”®ç»§ç»­... ");
             getch();
             break;
         case '2':
@@ -326,14 +327,14 @@ struct menu1* EnterDelete_1(struct menu1 *head)
         case '0':
             return head;
         default:
-            printf ("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+            printf ("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
             break;
         }
     }
     return head;
 }
 
-/*Free*/
+/*Freeï¼Œé˜²æ­¢å†…å­˜æ³„æ¼*/
 void FreeAll_1(struct menu1 *head)
 {
     if (head && head->left)
