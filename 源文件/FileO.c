@@ -7,14 +7,14 @@
 #include"../Headers/FileO.h"
 #include"../Headers/Core1.h"
 #include"../Headers/Core2.h"
-
-/*´ÓÎÄ¼şÖĞ¶ÁÈ¡ĞÅÏ¢Êı¾İº¯Êı½Ó¿Ú*/
+/*ä¸¤ä¸ªå…¨å±€å˜é‡buffer1ã€2è¡¨ç¤ºåˆ›å»ºçš„æ–‡ä»¶åï¼Œç”¨ä»¥å­˜å‚¨ä¸¤ä¸ªç³»ç»Ÿçš„æ–‡ä»¶ï¼Œæ ¹æ®ç”¨æˆ·ååˆ›å»º*/
+/*ä»æ–‡ä»¶ä¸­è¯»å–ä¿¡æ¯æ•°æ®å‡½æ•°æ¥å£*/
 struct menul* Read1 (struct menu1 *head)
 {
     char a [520];
     char b [52];
     char c [20];
-    char d [520];//Ë³Ğò±íÊ¾Ñ§ºÅĞÕÃûÁªÏµËŞÉá
+    char d [520];//é¡ºåºè¡¨ç¤ºå­¦å·å§“åè”ç³»å®¿èˆ
     FILE* file1;
     file1=fopen (filebuffer1,"rb+");
     if (file1==NULL)
@@ -35,7 +35,7 @@ struct menul* Read1 (struct menu1 *head)
     return head;
 }
 
-/*´æ´¢»ù±¾ĞÅÏ¢º¯Êı½Ó¿Ú*/
+/*å­˜å‚¨åŸºæœ¬ä¿¡æ¯å‡½æ•°æ¥å£*/
 struct menu1* Store1 (struct menu1 *head)
 {
     if (!head)
@@ -44,7 +44,7 @@ struct menu1* Store1 (struct menu1 *head)
     file1 = fopen (filebuffer1,"wb+");
     struct menu1 *queue[1000];
     int first = 0,tail = 0;
-    queue[tail++] = head;//Êı½á¹¹¶ÓÁĞ
+    queue[tail++] = head;//æ•°ç»“æ„é˜Ÿåˆ—
     if (file1==NULL)
         return head;
     while(first < tail)
@@ -58,7 +58,7 @@ struct menu1* Store1 (struct menu1 *head)
     return head;
 }
 
-/*´æ´¢³É¼¨ĞÅÏ¢º¯Êı½Ó¿Ú*/
+/*å­˜å‚¨æˆç»©ä¿¡æ¯å‡½æ•°æ¥å£*/
 struct menu2* Store2 (struct menu2 *head)
 {
     if (!head)
@@ -78,7 +78,7 @@ struct menu2* Store2 (struct menu2 *head)
     return head;
 }
 
-/*×¢²áº¯Êı½Ó¿Ú*/
+/*æ³¨å†Œå‡½æ•°æ¥å£*/
 struct Users * Register(struct Users *user)
 {
     struct Users *u = user,*ur = user,*uh;
@@ -90,21 +90,21 @@ TOP_:
 
     HideConsoleCursor();
     system("cls");
-    printf ("        --------------------******************×¢²áÕËºÅ*********************--------------------------\n");
-    printf ("        --------------------******************×¢²áÕËºÅ*********************--------------------------\n");
-    printf ("        --------------------******************×¢²áÕËºÅ*********************--------------------------\n\n\n");
-    printf ("                             Äú¿ÉÒÔÊäÈë 1 ÒÔ½øÈë×¢²á£¬ÊäÈëÆäËûÈÎÒâÊıÒÔ·µ»Ø...\n\n");
+    printf ("        --------------------******************æ³¨å†Œè´¦å·*********************--------------------------\n");
+    printf ("        --------------------******************æ³¨å†Œè´¦å·*********************--------------------------\n");
+    printf ("        --------------------******************æ³¨å†Œè´¦å·*********************--------------------------\n\n\n");
+    printf ("                             æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥è¿›å…¥æ³¨å†Œï¼Œè¾“å…¥å…¶ä»–ä»»æ„æ•°ä»¥è¿”å›...\n\n");
     fflush(stdin);
     ch = getch();
     if (ch == '1')
     {
-        printf ("ÇëÊäÈëÄúµÄÕËºÅ ");
+        printf ("è¯·è¾“å…¥æ‚¨çš„è´¦å· ");
         enterspring(act,1);
         while(u)
         {
             if (strcmp(u->accounts,act) == 0)
             {
-                MessageBox(NULL,TEXT("ÕËºÅÒÑ¾­´æÔÚ..."),TEXT("!"),0);
+                MessageBox(NULL,TEXT("è´¦å·å·²ç»å­˜åœ¨..."),TEXT("!"),0);//æ£€ç´¢è´¦å·æ˜¯å¦å­˜åœ¨
                 return user;
             }
             ur = u;
@@ -112,12 +112,12 @@ TOP_:
         }
         uh = (struct Users*)malloc(sizeof(struct Users));
         if (uh == NULL) return user;
-        printf ("ÇëÊäÈëÄúµÄÃÜÂë ");
+        printf ("è¯·è¾“å…¥æ‚¨çš„å¯†ç  ");
         enterspring(pass,2);
-        printf ("ÇëÔÙ´ÎÊäÈëÄúµÄÃÜÂë ");
+        printf ("è¯·å†æ¬¡è¾“å…¥æ‚¨çš„å¯†ç  ");
         if(strcmp(pass,enterspring(p1,2)) != 0)
         {
-            printf ("Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¬ÇëÖØĞÂÊäÈë.\n°´ÈÎÒâ¼ü¼ÌĞø...");
+            printf ("ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼Œè¯·é‡æ–°è¾“å…¥.\næŒ‰ä»»æ„é”®ç»§ç»­...");
             getch();
             goto TOP_;
         }
@@ -129,12 +129,12 @@ TOP_:
     }
     else
         return user;
-    printf ("×¢²á³É¹¦£¬¼´½«·µ»ØµÇÂ½Ò³Ãæ£¡...");
+    printf ("æ³¨å†ŒæˆåŠŸï¼Œå³å°†è¿”å›ç™»é™†é¡µé¢ï¼...");
     Sleep(200);
     return user;
 }
 
-/*µÇÂ½º¯Êı½Ó¿Ú*/
+/*ç™»é™†å‡½æ•°æ¥å£*/
 int Enter(struct Users *user)
 {
 
@@ -144,19 +144,19 @@ int Enter(struct Users *user)
 TOP_:
     HideConsoleCursor();
     system("cls");
-    printf ("    ------------------------******************µÇÂ½ÏµÍ³*********************------------------------\n");
-    printf ("    ------------------------******************µÇÂ½ÏµÍ³*********************------------------------\n");
-    printf ("    ------------------------******************µÇÂ½ÏµÍ³*********************------------------------\n\n\n");
-    printf ("                             Äú¿ÉÒÔÊäÈë 1 ÒÔ½øÈëµÇÂ½£¬ÆäËûÈÎÒâ¼üÒÔ·µ»Ø...\n\n");
+    printf ("    ------------------------******************ç™»é™†ç³»ç»Ÿ*********************------------------------\n");
+    printf ("    ------------------------******************ç™»é™†ç³»ç»Ÿ*********************------------------------\n");
+    printf ("    ------------------------******************ç™»é™†ç³»ç»Ÿ*********************------------------------\n\n\n");
+    printf ("                             æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥è¿›å…¥ç™»é™†ï¼Œå…¶ä»–ä»»æ„é”®ä»¥è¿”å›...\n\n");
     fflush(stdin);
     ch = getch();
     if (ch == '1')
     {
-        printf ("\nÇëÊäÈëÄúµÄÕËºÅ ");
+        printf ("\nè¯·è¾“å…¥æ‚¨çš„è´¦å· ");
         enterspring(act,1);
         if (user == NULL)
         {
-            MessageBox(NULL,TEXT("ÕËºÅĞÅÏ¢²»´æÔÚ..."),TEXT("!"),0);
+            MessageBox(NULL,TEXT("è´¦å·ä¿¡æ¯ä¸å­˜åœ¨..."),TEXT("!"),0);
             return 0;
         }
         struct Users *p = user;
@@ -166,18 +166,18 @@ TOP_:
         }
         if (p == NULL)
         {
-            MessageBox(NULL,TEXT("ÕËºÅĞÅÏ¢²»´æÔÚ..."),TEXT("!"),0);
+            MessageBox(NULL,TEXT("è´¦å·ä¿¡æ¯ä¸å­˜åœ¨..."),TEXT("!"),0);
             return 0;
         }
-        printf ("\nÇëÊäÈëÄúµÄÃÜÂë ");
+        printf ("\nè¯·è¾“å…¥æ‚¨çš„å¯†ç  ");
         while(strcmp(p->password,enterspring(pass,2)) != 0)
         {
-            printf ("ÃÜÂë´íÎó,Äú¿ÉÒÔÊäÈë 1 ÒÔ¼ÌĞøÊäÈëÃÜÂë£¬0 ÒÔË¢ĞÂÒ³ÃæÖØĞÂµÇÂ½ \n");
+            printf ("å¯†ç é”™è¯¯,æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥ç»§ç»­è¾“å…¥å¯†ç ï¼Œ0 ä»¥åˆ·æ–°é¡µé¢é‡æ–°ç™»é™† \n");
             fflush(stdin);
             gh = getch();
             if (gh == '1')
             {
-                printf ("\nÇëÊäÈëÄúµÄÃÜÂë ");
+                printf ("\nè¯·è¾“å…¥æ‚¨çš„å¯†ç  ");
                 continue;
             }
             else if (gh == '0')
@@ -186,7 +186,7 @@ TOP_:
     }
     else
         return 0;
-    /*ÓÃÒÔ´´½¨´æ·ÅÓÃ»§Êı¾İÁ½¸öÎÄ¼ş¼ĞµÄÃû³Æ*/
+    /*ç”¨ä»¥åˆ›å»ºå­˜æ”¾ç”¨æˆ·æ•°æ®ä¸¤ä¸ªæ–‡ä»¶å¤¹çš„åç§°*/
     strcpy(filebuffer1,act);
     strcpy(filebuffer2,act);
     strcat(filebuffer1,"_IF.txt");
@@ -194,7 +194,7 @@ TOP_:
     return 1;
 }
 
-/*¶ÁÈ¡ÓÃ»§ÕË»§ĞÅÏ¢*/
+/*è¯»å–ç”¨æˆ·è´¦æˆ·ä¿¡æ¯*/
 struct Users* Readuser(struct Users *user)
 {
     struct Users *ph, *pc = user;
@@ -227,7 +227,7 @@ struct Users* Readuser(struct Users *user)
     return user;
 }
 
-/*´æ´¢ÓÃ»§ÕË»§ĞÅÏ¢º¯ÊıÊµÏÖ*/
+/*å­˜å‚¨ç”¨æˆ·è´¦æˆ·ä¿¡æ¯å‡½æ•°å®ç°*/
 void  StoreUser (struct Users *user)
 {
     struct Users *p1;
@@ -235,7 +235,7 @@ void  StoreUser (struct Users *user)
     FILE *p = fopen("Users.txt","wb+");
     if (!p)
     {
-        printf ("±£´æÓÃ»§ĞÅÏ¢Ê§°Ü...");
+        printf ("ä¿å­˜ç”¨æˆ·ä¿¡æ¯å¤±è´¥...");
         return ;
     }
     //printf ("%s %s",user->accounts,user->password);
@@ -250,20 +250,20 @@ void  StoreUser (struct Users *user)
     return ;
 }
 
-/*ĞŞ¸ÄÓÃ»§ÕËºÅÃÜÂëº¯Êı*/
+/*ä¿®æ”¹ç”¨æˆ·è´¦å·å¯†ç å‡½æ•°*/
 struct Users* ChangePass(struct Users *user)
 {
     char act[19],ch,pass[19],pass1[19],pass2[19];
     int len = strlen(filebuffer1),i;
     struct Users *p = user;
-    /*¼ìË÷µ±Ç°ÕË»§Ãû*/
+    /*æ£€ç´¢å½“å‰è´¦æˆ·å---æ ¹æ®å½“å‰ç”¨æˆ·åä¿¡æ¯filebufferå®ç°*/
     for (i=0; i<len; i++)
     {
         if (filebuffer1[i] == '_')
             break;
         act[i] = filebuffer1[i];
     }
-    act[i] = '\0';//·ÀÓùĞÔ±à³Ì
+    act[i] = '\0';//é˜²å¾¡æ€§ç¼–ç¨‹
     while (p && strcmp(p->accounts,act) != 0)
     {
         p = p->next;
@@ -271,36 +271,36 @@ struct Users* ChangePass(struct Users *user)
 TOP_:
     HideConsoleCursor();
     system("cls");
-    printf ("   --------------------******************ĞŞ¸ÄÃÜÂë*********************------------------------\n");
-    printf ("   --------------------******************ĞŞ¸ÄÃÜÂë*********************------------------------\n");
-    printf ("   --------------------******************ĞŞ¸ÄÃÜÂë*********************------------------------\n\n\n");
-    printf ("                        Äú¿ÉÒÔÊäÈë 1 ÒÔ¿ªÊ¼ĞŞ¸Ä²Ù×÷£¬0 ÒÔ·µ»Ø...\n");
+    printf ("   --------------------******************ä¿®æ”¹å¯†ç *********************------------------------\n");
+    printf ("   --------------------******************ä¿®æ”¹å¯†ç *********************------------------------\n");
+    printf ("   --------------------******************ä¿®æ”¹å¯†ç *********************------------------------\n\n\n");
+    printf ("                        æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥å¼€å§‹ä¿®æ”¹æ“ä½œï¼Œ0 ä»¥è¿”å›...\n");
     fflush(stdin);
     ch = getch();
     if (ch == '1')
     {
 
-        printf ("\nÇëÊäÈëÔ­ÃÜÂë  ");
+        printf ("\nè¯·è¾“å…¥åŸå¯†ç   ");
         while(p && strcmp(p->password,enterspring(pass,2)) != 0)
         {
             char gh;
-            printf ("ÃÜÂë´íÎó,Äú¿ÉÒÔÊäÈë 1 ÒÔ¼ÌĞøÊäÈëÃÜÂë£¬0 ÒÔË¢ĞÂÒ³Ãæ ");
+            printf ("å¯†ç é”™è¯¯,æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥ç»§ç»­è¾“å…¥å¯†ç ï¼Œ0 ä»¥åˆ·æ–°é¡µé¢ ");
             fflush(stdin);
             gh = getch();
             if (gh == '1')
             {
-                printf ("\nÇëÊäÈëÄúµÄÔ­ÃÜÂë ");
+                printf ("\nè¯·è¾“å…¥æ‚¨çš„åŸå¯†ç  ");
                 continue;
             }
             else if (gh == '0')
                 goto TOP_;
         }
-        printf ("ÇëÊäÈëÄúµÄĞÂÃÜÂë ");
+        printf ("è¯·è¾“å…¥æ‚¨çš„æ–°å¯†ç  ");
         enterspring(pass1,2);
-        printf ("ÇëÔÙ´ÎÊäÈëÄúµÄÃÜÂë ");
+        printf ("è¯·å†æ¬¡è¾“å…¥æ‚¨çš„å¯†ç  ");
         if(strcmp(pass1,enterspring(pass2,2)) != 0)
         {
-            printf ("Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¬ÇëÖØĞÂÊäÈë.\n°´ÈÎÒâ¼ü¼ÌĞø...");
+            printf ("ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼Œè¯·é‡æ–°è¾“å…¥.\næŒ‰ä»»æ„é”®ç»§ç»­...");
             getch();
             goto TOP_;
         }
@@ -308,7 +308,7 @@ TOP_:
     }
     if (ch == '0')
         return user;
-    printf ("ĞŞ¸ÄÃÜÂë³É¹¦£¡Çë°´ÈÎÒâ¼ü·µ»Ø...");
+    printf ("ä¿®æ”¹å¯†ç æˆåŠŸï¼è¯·æŒ‰ä»»æ„é”®è¿”å›...");
     getch();
     return user;
 }
