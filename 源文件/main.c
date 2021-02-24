@@ -6,7 +6,7 @@
 #include"../Headers/Core1.h"
 #include"../Headers/Core2.h"
 #include"../Headers/Input.h"
-int flag;//ÓÃÓÚÏµÍ³¶şµÄ¶àÖØ±íÖØ¸´ĞÔÑéÖ¤
+int flag;//ç”¨äºç³»ç»ŸäºŒçš„å¤šé‡è¡¨é‡å¤æ€§éªŒè¯
 /*struct menu1* Record_1 (struct menu1 *head,char *a,char *b,char *c,char *d);
 struct menu1* Seeit_1  (struct menu1 *head);
 struct menu1* Delete_1 (struct menu1 *head);
@@ -15,7 +15,7 @@ struct menu1* Change_1 (struct menu1 *head);
 struct menu2* Record_2 (struct menu2 *head,char *a,char *b,float c,float d,float e,int change);
 struct menu2* Seeit_2  (struct menu2 *head);*/
 
-/*ÓÃÓÚÍË³ö³ÌĞò»òÕßÍË³öµÇÂ½µÄ½Ó¿Úº¯Êı*/
+/*ç”¨äºé€€å‡ºç¨‹åºæˆ–è€…é€€å‡ºç™»é™†çš„æ¥å£å‡½æ•°*/
 void Exit (struct Users *h,struct menu1 *h1,struct menu2 *h2,struct menu2 *h3,struct menu2 *h4,struct menu2 *h5)
 {
     Store1(h1);
@@ -32,14 +32,14 @@ void Exit (struct Users *h,struct menu1 *h1,struct menu2 *h2,struct menu2 *h3,st
 
 int main()
 {
-    SetConsoleTitle ("Ñ§Éú¹ÜÀíÏµÍ³");
+    SetConsoleTitle ("å­¦ç”Ÿç®¡ç†ç³»ç»Ÿ");
 
     heart();
-    MessageBox(NULL,TEXT("»¶Ó­ÄúÊ¹ÓÃÑ§Éú¹ÜÀíÏµÍ³4.0,\n Ïà½ÏÓÚ3.0°æ±¾ÎÒÃÇ×öÁË½Ï´óµÄ¸Ä±ä\n1:ÎÒÃÇÓÅ»¯ÁËÒ»Ğ©ÅÅ°æÎÊÌâ\n2:ÎÒÃÇÓÅ»¯ÁËÈË»ú½»»¥µÄºÏÀíĞÔ\n3:ĞŞ¸´ÁËË¢ĞÂ¿¨ÆÁÎÊÌâ\n4:ĞŞ¸´ÁË¼¸¸öÄú²»Öªµ½µÄbug\n5:ÍêÉÆÁËÏµÍ³¹¦ÄÜ\n6:¼«´óµÄÓÅ»¯ÁË³ÌĞòĞÔÄÜ"),TEXT("Hello!"),0);
-    /*ĞèÒªÓÃµ½µÄ¶¨Òå*/
-    struct menu1 *head = NULL;
-    struct menu2 *head1 = NULL,*head2 = NULL,*head3 = NULL,*mainhead = NULL;
-    struct Users *user = NULL;
+    MessageBox(NULL,TEXT("æ¬¢è¿æ‚¨ä½¿ç”¨å­¦ç”Ÿç®¡ç†ç³»ç»Ÿ4.0,\n ç›¸è¾ƒäº3.0ç‰ˆæœ¬æˆ‘ä»¬åšäº†è¾ƒå¤§çš„æ”¹å˜\n1:æˆ‘ä»¬ä¼˜åŒ–äº†ä¸€äº›æ’ç‰ˆé—®é¢˜\n2:æˆ‘ä»¬ä¼˜åŒ–äº†äººæœºäº¤äº’çš„åˆç†æ€§\n3:ä¿®å¤äº†åˆ·æ–°å¡å±é—®é¢˜\n4:ä¿®å¤äº†å‡ ä¸ªæ‚¨ä¸çŸ¥åˆ°çš„bug\n5:å®Œå–„äº†ç³»ç»ŸåŠŸèƒ½\n6:æå¤§çš„ä¼˜åŒ–äº†ç¨‹åºæ€§èƒ½"),TEXT("Hello!"),0);
+    /*éœ€è¦ç”¨åˆ°çš„å®šä¹‰*/
+    struct menu1 *head = NULL;//ä¿¡æ¯ç®¡ç†ç³»ç»Ÿè¡¨å¤´
+    struct menu2 *head1 = NULL,*head2 = NULL,*head3 = NULL,*mainhead = NULL;//è¡¨ç¤ºé«˜æ•°æˆç»©ã€è‹±è¯­æˆç»©ã€cæˆç»©å’Œæ€»æˆç»©è¡¨å¤´
+    struct Users *user = NULL;//ç”¨æˆ·è´¦å·å¯†ç è¡¨å¤´
     char Sn2[52], Name2[52], temp[52], name1[52], sn1[52], chat1[52], dor1[52];
     float Grade1,Grade2,Grade3,f;
     char c,ch,cp;
@@ -48,7 +48,7 @@ int main()
 
 Menu0:
     {
-        //¶ÁÈ¡ÓÃ»§ÕËºÅÃÜÂë
+        //è¯»å–ç”¨æˆ·è´¦å·å¯†ç 
         user = Readuser(user);
         while(1)
         {
@@ -58,12 +58,12 @@ Menu0:
             switch(ch)
             {
             case '1':
-                if (Enter(user))
+                if (Enter(user))//æˆåŠŸç™»é™†çš„è¯
                 {
                     head = Read1(head);
                     FILE *file2 = fopen(filebuffer2,"rb+");
                     if (file2 == NULL)      goto Menu1;
-                    cp = fgetc(file2);
+                    cp = fgetc(file2);//é¢„é˜²æ–‡ä»¶ä¸ºç©ºçš„æƒ…å†µ
                     if (cp == EOF)
                     {
                         fclose(file2);
@@ -91,13 +91,13 @@ Menu0:
                 break;
             case '0':
                 system ("cls");
-                printf ("\t\t\t\t\tBye!ÆÚ´ıÄúµÄÏÂ´ÎÊ¹ÓÃ\n\n\n");
-                MessageBox(NULL,TEXT("¸ĞĞ»ÄúÊ¹ÓÃ±¾³ÌĞò"),TEXT("Bye!"),0);
+                printf ("\t\t\t\t\tBye!æœŸå¾…æ‚¨çš„ä¸‹æ¬¡ä½¿ç”¨\n\n\n");
+                MessageBox(NULL,TEXT("æ„Ÿè°¢æ‚¨ä½¿ç”¨æœ¬ç¨‹åº"),TEXT("Bye!"),0);
                 Exit(user,head,mainhead,head1,head2,head3);
                 exit(0);
                 break;
             default:
-                MessageBox(NULL,TEXT("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë..."),TEXT("!"),0);
+                MessageBox(NULL,TEXT("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥..."),TEXT("!"),0);
             }
         }
     }
@@ -127,8 +127,8 @@ Menu1:
                 break;
             case '5':
                 system ("cls");
-                printf ("\t\t\t\t\tBye!ÆÚ´ıÄúµÄÏÂ´ÎÊ¹ÓÃ\n\n\n");
-                MessageBox(NULL,TEXT("¸ĞĞ»ÄúÊ¹ÓÃ±¾³ÌĞò"),TEXT("Bye!"),0);
+                printf ("\t\t\t\t\tBye!æœŸå¾…æ‚¨çš„ä¸‹æ¬¡ä½¿ç”¨\n\n\n");
+                MessageBox(NULL,TEXT("æ„Ÿè°¢æ‚¨ä½¿ç”¨æœ¬ç¨‹åº"),TEXT("Bye!"),0);
                 Exit(user,head,mainhead,head1,head2,head3);
                 exit(0);
                 break;
@@ -141,7 +141,7 @@ Menu1:
                 ShowMap1();
                 break;
             default  :
-                printf ("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+                printf ("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 
             }
         }
@@ -160,61 +160,61 @@ Menu2:
                 memset(chat1,'\0',sizeof(chat1));
                 memset(dor1,'\0',sizeof(dor1));
             case '1' :
-                printf ("ÇëÊäÈëÑ§ÉúµÄÑ§ºÅ      ");
+                printf ("è¯·è¾“å…¥å­¦ç”Ÿçš„å­¦å·      ");
                 strcpy(sn1,inputString(sn1,52));
-                printf ("ÇëÊäÈëÑ§ÉúµÄĞÕÃû      ");
+                printf ("è¯·è¾“å…¥å­¦ç”Ÿçš„å§“å      ");
                 strcpy(name1,inputString(name1,52));
-                printf ("ÇëÊäÈëÑ§ÉúµÄÁªÏµµç»°  ");
+                printf ("è¯·è¾“å…¥å­¦ç”Ÿçš„è”ç³»ç”µè¯  ");
                 strcpy(chat1,inputString(chat1,52));
-                printf ("ÇëÊäÈëÑ§ÉúµÄËŞÉáºÅ    ");
+                printf ("è¯·è¾“å…¥å­¦ç”Ÿçš„å®¿èˆå·    ");
                 strcpy(dor1,inputString(dor1,52));
                 head=Record_1(head,sn1,name1,chat1,dor1);
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '2' :
                 head = EnterDelete_1(head);
                 ShowMap2();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '3' :
                 ShowSeeit_1();
                 Seeit_1 (head);
-                printf ("\nÇë°´ÈÎÒâ¼ü·µ»ØÉÏÒ»¼¶");
+                printf ("\nè¯·æŒ‰ä»»æ„é”®è¿”å›ä¸Šä¸€çº§");
                 getch();
                 ShowMap2 ();
                 break;
             case '4' :
                 Find_1(head,ch);
-                printf ("\nÇë°´ÈÎÒâ¼ü·µ»Ø...");
+                printf ("\nè¯·æŒ‰ä»»æ„é”®è¿”å›...");
                 getch();
                 ShowMap2();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '5' :
                 ShowSeeit_1();
                 Seeit_1 (head);
                 head = Change_1(head);
                 ShowMap2 ();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '6' :
                 Find_1(head,ch);
-                printf ("\nÇë°´ÈÎÒâ¼ü·µ»Ø...");
+                printf ("\nè¯·æŒ‰ä»»æ„é”®è¿”å›...");
                 getch();
                 ShowMap2();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '7' :
                 Store1(head);
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '8' :
                 goto Menu1;
                 break;
             case '9' :
                 system ("cls");
-                printf ("\t\t\t\t\tBye!ÆÚ´ıÄúµÄÏÂ´ÎÊ¹ÓÃ\n\n\n");
-                MessageBox(NULL,TEXT("¸ĞĞ»ÄúÊ¹ÓÃ±¾³ÌĞò"),TEXT("Bye!"),0);
+                printf ("\t\t\t\t\tBye!æœŸå¾…æ‚¨çš„ä¸‹æ¬¡ä½¿ç”¨\n\n\n");
+                MessageBox(NULL,TEXT("æ„Ÿè°¢æ‚¨ä½¿ç”¨æœ¬ç¨‹åº"),TEXT("Bye!"),0);
                 Exit(user,head,mainhead,head1,head2,head3);
                 exit(0);
                 break;
@@ -222,7 +222,7 @@ Menu2:
                 ShowMap2();
                 break;
             default  :
-                printf ("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+                printf ("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 
             }
         }
@@ -239,15 +239,15 @@ Menu3:
             switch(ch)
             {
             case '1' :
-                printf ("ÇëÊäÈë´ıÂ¼ÈëÑ§ÉúµÄÑ§ºÅ ");
+                printf ("è¯·è¾“å…¥å¾…å½•å…¥å­¦ç”Ÿçš„å­¦å· ");
                 strcpy(Sn2,inputString(Sn2,52));
-                printf ("ÇëÊäÈë¸ÃÉúµÄĞÕÃû  ");
+                printf ("è¯·è¾“å…¥è¯¥ç”Ÿçš„å§“å  ");
                 strcpy(Name2,inputString(Name2,52));
-                printf ("ÇëÂ¼Èë¸ÃÉúµÄ¸ßµÈÊıÑ§³É¼¨  ");
+                printf ("è¯·å½•å…¥è¯¥ç”Ÿçš„é«˜ç­‰æ•°å­¦æˆç»©  ");
                 Grade1 = inputlnt(0,100);
-                printf ("ÇëÂ¼Èë¸ÃÉúµÄ´óÑ§Ó¢Óï³É¼¨  ");
+                printf ("è¯·å½•å…¥è¯¥ç”Ÿçš„å¤§å­¦è‹±è¯­æˆç»©  ");
                 Grade2 = inputlnt(0,100);
-                printf ("ÇëÂ¼Èë¸ÃÉúµÄCÓïÑÔ³ÌĞòÉè¼Æ³É¼¨(½«ÎªÄú×Ô¶¯¼ÆËãÈı¿ÆÆ½¾ù³É¼¨)  ");
+                printf ("è¯·å½•å…¥è¯¥ç”Ÿçš„Cè¯­è¨€ç¨‹åºè®¾è®¡æˆç»©(å°†ä¸ºæ‚¨è‡ªåŠ¨è®¡ç®—ä¸‰ç§‘å¹³å‡æˆç»©)  ");
                 Grade3 = inputlnt(0,100);
                 flag = 0;
                 mainhead = Record_2 (mainhead,Sn2,Name2,Grade1,Grade2,Grade3,0);
@@ -257,17 +257,17 @@ Menu3:
                     head2 = Record_2 (head2,Sn2,Name2,Grade1,Grade2,Grade3,2);
                     head3 = Record_2 (head3,Sn2,Name2,Grade1,Grade2,Grade3,3);
                 }
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '2' :
                 while (1)
                 {
                     Seeit_2(mainhead);
-                    printf ("Äú¿ÉÒÔÊäÈë 1 ÒÔ½øĞĞÉ¾³ı£¬2 ÒÔÈ«²¿É¾³ı£¬0 ÒÔ·µ»Ø²Ëµ¥\n");
+                    printf ("æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥è¿›è¡Œåˆ é™¤ï¼Œ2 ä»¥å…¨éƒ¨åˆ é™¤ï¼Œ0 ä»¥è¿”å›èœå•\n");
                     c = getch();
                     if (c == '1')
                     {
-                        printf ("ÇëÊäÈëÄúÏëÒªÉ¾³ıÑ§ÉúÊı¾İµÄÑ§ÉúÑ§ºÅ  ");
+                        printf ("è¯·è¾“å…¥æ‚¨æƒ³è¦åˆ é™¤å­¦ç”Ÿæ•°æ®çš„å­¦ç”Ÿå­¦å·  ");
                         strcpy(Sn2,inputString(Sn2,52));
                         flag = 0;
                         mainhead = Delete_2(mainhead,Sn2);
@@ -276,9 +276,9 @@ Menu3:
                             head1 = Delete_2(head1,Sn2);
                             head2 = Delete_2(head2,Sn2);
                             head3 = Delete_2(head3,Sn2);
-                            printf ("²Ù×÷³É¹¦£¡ ");
+                            printf ("æ“ä½œæˆåŠŸï¼ ");
                         }
-                        printf ("±¾´Î²Ù×÷½áÊø£¬Çë°´ÈÎÒâ¼ü¼ÌĞø...");
+                        printf ("æœ¬æ¬¡æ“ä½œç»“æŸï¼Œè¯·æŒ‰ä»»æ„é”®ç»§ç»­...");
                         getch();
                     }
                     else if (c == '2')
@@ -296,38 +296,38 @@ Menu3:
                         break;
                 }
                 ShowMap3();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '3' :
                 Seeit_2 (mainhead);
-                printf ("\nÇë°´ÈÎÒâ¼ü·µ»ØÉÏÒ»¼¶");
+                printf ("\nè¯·æŒ‰ä»»æ„é”®è¿”å›ä¸Šä¸€çº§");
                 getch();
                 ShowMap3 ();
                 break;
             case '4' :
-                printf ("ÇëÊäÈëÄúÒª²é¿´Ñ§ÉúµÄÑ§ºÅ ");
+                printf ("è¯·è¾“å…¥æ‚¨è¦æŸ¥çœ‹å­¦ç”Ÿçš„å­¦å· ");
                 strcpy(Sn2,inputString(Sn2,52));
                 Find_2 (mainhead,4,Sn2);
                 ShowConsoleCursor();
-                printf ("Çë°´ÈÎÒâ¼ü¼ÌĞø...");
+                printf ("è¯·æŒ‰ä»»æ„é”®ç»§ç»­...");
                 getch();
                 ShowMap3();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '5' :
                 Seeit_2 (mainhead);
-                printf ("\nÇëÊäÈëÄúÒªĞŞ¸ÄÑ§ÉúµÄÑ§ºÅ ");
+                printf ("\nè¯·è¾“å…¥æ‚¨è¦ä¿®æ”¹å­¦ç”Ÿçš„å­¦å· ");
                 strcpy(Sn2,inputString(Sn2,52));
                 while (Find_2(mainhead,4,Sn2))
                 {
                     ShowConsoleCursor();
-                    printf ("\nÄú¿ÉÒÔÊäÈë 1 ÒÔ¸ü¸ÄÑ§ºÅ£¬2 ÒÔ¸ü¸ÄĞÕÃû£¬3 ÒÔ¸ü¸Ä¸ßÊı³É¼¨£¬4 ÒÔ¸ü¸ÄÓ¢Óï³É¼¨£¬5 ÒÔ¸ü¸ÄCÓïÑÔ³É¼¨£¬0 ÒÔ½áÊø²Ù×÷ \n");
+                    printf ("\næ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥æ›´æ”¹å­¦å·ï¼Œ2 ä»¥æ›´æ”¹å§“åï¼Œ3 ä»¥æ›´æ”¹é«˜æ•°æˆç»©ï¼Œ4 ä»¥æ›´æ”¹è‹±è¯­æˆç»©ï¼Œ5 ä»¥æ›´æ”¹Cè¯­è¨€æˆç»©ï¼Œ0 ä»¥ç»“æŸæ“ä½œ \n");
                     book = 0;
                     c = getch();
                     switch(c)
                     {
                     case '1':
-                        printf ("ÇëÊäÈëĞÂÑ§ºÅ£¡");
+                        printf ("è¯·è¾“å…¥æ–°å­¦å·ï¼");
                         strcpy(temp,inputString(temp,52));
                         mainhead = Change_2(mainhead,1,Sn2,temp,0);
                         head1 = Change_2(head1,1,Sn2,temp,0);
@@ -336,7 +336,7 @@ Menu3:
                         strcpy (Sn2,temp);
                         break;
                     case '2':
-                        printf ("ÇëÊäÈëĞÂĞÕÃû£¡");
+                        printf ("è¯·è¾“å…¥æ–°å§“åï¼");
                         strcpy(temp,inputString(temp,52));
                         mainhead = Change_2(mainhead,2,Sn2,temp,0);
                         head1 = Change_2(head1,2,Sn2,temp,0);
@@ -344,7 +344,7 @@ Menu3:
                         head3 = Change_2(head3,2,Sn2,temp,0);
                         break;
                     case '3':
-                        printf ("ÇëÊäÈëĞÂ¸ßÊı³É¼¨£¡");
+                        printf ("è¯·è¾“å…¥æ–°é«˜æ•°æˆç»©ï¼");
                         f = inputlnt(0,100);
                         mainhead = Change_2(mainhead,3,Sn2,temp,f);
                         head1 = Change_2(head1,3,Sn2,temp,f);
@@ -352,7 +352,7 @@ Menu3:
                         head3 = Change_2(head3,3,Sn2,temp,f);
                         break;
                     case '4':
-                        printf ("ÇëÊäÈëĞÂÓ¢Óï³É¼¨£¡");
+                        printf ("è¯·è¾“å…¥æ–°è‹±è¯­æˆç»©ï¼");
                         f = inputlnt(0,100);
                         mainhead = Change_2(mainhead,4,Sn2,temp,f);
                         head1 = Change_2(head1,4,Sn2,temp,f);
@@ -360,7 +360,7 @@ Menu3:
                         head3 = Change_2(head3,4,Sn2,temp,f);
                         break;
                     case '5':
-                        printf ("ÇëÊäÈëĞÂCÓïÑÔ³É¼¨£¡");
+                        printf ("è¯·è¾“å…¥æ–°Cè¯­è¨€æˆç»©ï¼");
                         f = inputlnt(0,100);
                         mainhead = Change_2(mainhead,5,Sn2,temp,f);
                         head1 = Change_2(head1,5,Sn2,temp,f);
@@ -375,24 +375,24 @@ Menu3:
                         break;
 
                 }
-                printf ("ÇëÊäÈëÈÎÒâ¼ü·µ»Ø...");
+                printf ("è¯·è¾“å…¥ä»»æ„é”®è¿”å›...");
                 fflush(stdin);
                 getch();
                 ShowMap3();
                 break;
             case '6' :
-                printf ("ÇëÊäÈëÄúÒª²é¿´Ñ§ÉúµÄĞÕÃû ");
+                printf ("è¯·è¾“å…¥æ‚¨è¦æŸ¥çœ‹å­¦ç”Ÿçš„å§“å ");
                 strcpy(Name2,inputString(Name2,52));
                 Find_2 (mainhead,6,Name2);
                 ShowConsoleCursor();
-                printf ("Çë°´ÈÎÒâ¼ü¼ÌĞø...");
+                printf ("è¯·æŒ‰ä»»æ„é”®ç»§ç»­...");
                 getch();
                 ShowMap3();
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '7' :
                 Store2(mainhead);
-                printf ("±¾´Î²Ù×÷Íê³É£¬Äú¿ÉÒÔ¼ÌĞøÊäÈë²Ëµ¥ÉÏµÄ°´¼ü\n");
+                printf ("æœ¬æ¬¡æ“ä½œå®Œæˆï¼Œæ‚¨å¯ä»¥ç»§ç»­è¾“å…¥èœå•ä¸Šçš„æŒ‰é”®\n");
                 break;
             case '8' :
                 CordReport_2(mainhead,head1,head2,head3);
@@ -413,20 +413,20 @@ Menu3:
                 break;
             case 'b' :
                 system ("cls");
-                printf ("\t\t\t\t\tBye!ÆÚ´ıÄúµÄÏÂ´ÎÊ¹ÓÃ\n\n\n");
-                MessageBox(NULL,TEXT("¸ĞĞ»ÄúÊ¹ÓÃ±¾³ÌĞò"),TEXT("Bye!"),0);
+                printf ("\t\t\t\t\tBye!æœŸå¾…æ‚¨çš„ä¸‹æ¬¡ä½¿ç”¨\n\n\n");
+                MessageBox(NULL,TEXT("æ„Ÿè°¢æ‚¨ä½¿ç”¨æœ¬ç¨‹åº"),TEXT("Bye!"),0);
                 Exit(user,head,mainhead,head1,head2,head3);
                 exit(0);
                 break;
             case 'B' :
                 system ("cls");
-                printf ("\t\t\t\t\tBye!ÆÚ´ıÄúµÄÏÂ´ÎÊ¹ÓÃ\n\n\n");
-                MessageBox(NULL,TEXT("¸ĞĞ»ÄúÊ¹ÓÃ±¾³ÌĞò"),TEXT("Bye!"),0);
+                printf ("\t\t\t\t\tBye!æœŸå¾…æ‚¨çš„ä¸‹æ¬¡ä½¿ç”¨\n\n\n");
+                MessageBox(NULL,TEXT("æ„Ÿè°¢æ‚¨ä½¿ç”¨æœ¬ç¨‹åº"),TEXT("Bye!"),0);
                 Exit(user,head,mainhead,head1,head2,head3);
                 exit(0);
                 break;
             default  :
-                printf ("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+                printf ("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 
             }
         }
