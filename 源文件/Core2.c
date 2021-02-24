@@ -2,28 +2,28 @@
 #include <stdlib.h>
 #include <windows.h>
 #include"../Headers/Core2.h"
-extern int flag;//ÉêÃ÷È«¾Ö±äÁ¿µÄÊ¹ÓÃ
+extern int flag;//ç”³æ˜å…¨å±€å˜é‡çš„ä½¿ç”¨
 
-/*ÓÃÓÚ¼ÇÂ¼Êı¾İ£¬changeÓÃÒÔ±íÊ¾Ñ¡Ôñ£¬1¸öº¯Êı·Ö±ğ´¦Àí¶à¸ö±íÍ·*/
-struct menu2* Record_2 (struct menu2 *head,char *a,char *b,float c,float d,float e,int change)//²ÎÊıÒ»Ò»¶ÔÓ¦
+/*ç”¨äºè®°å½•æ•°æ®ï¼Œchangeç”¨ä»¥è¡¨ç¤ºé€‰æ‹©ï¼Œ1ä¸ªå‡½æ•°åˆ†åˆ«å¤„ç†å¤šä¸ªè¡¨å¤´*/
+struct menu2* Record_2 (struct menu2 *head,char *a,char *b,float c,float d,float e,int change)//å‚æ•°ä¸€ä¸€å¯¹åº”ï¼Œå³å­¦å·å§“åä¸ä¸‰ç§‘æˆç»©
 {
-    struct menu2 *p = head,*pr,*ph;//Ë«ÏòÁ´±í
+    struct menu2 *p = head,*pr,*ph;//åŒå‘é“¾è¡¨
     float f = (c+d+e)/3.0;
     while (p)
     {
         if (strcmp(p->sn2,a) == 0)
         {
-            MessageBox(NULL,TEXT("Ñ§ºÅ´æÔÚÖØ¸´£¬Çë¼ì²éÊäÈë..."),TEXT("!"),0);
+            MessageBox(NULL,TEXT("å­¦å·å­˜åœ¨é‡å¤ï¼Œè¯·æ£€æŸ¥è¾“å…¥..."),TEXT("!"),0);
             flag = 1;
             return head;
         }
         p = p->Next;
-    }//¼ìË÷Ñ§ºÅÖØ¸´
+    }//æ£€ç´¢å­¦å·é‡å¤
     p = head;
     ph = (struct menu2*)malloc(sizeof(struct menu2));
     if (ph==NULL)
     {
-        MessageBox(NULL,TEXT("³ÌĞòÒì³£±À"),TEXT ("Sorry!"),0);
+        MessageBox(NULL,TEXT("ç¨‹åºå¼‚å¸¸å´©"),TEXT ("Sorry!"),0);
         exit (0);
     }
     if (p == NULL)
@@ -51,7 +51,7 @@ struct menu2* Record_2 (struct menu2 *head,char *a,char *b,float c,float d,float
                     pr = p;
                     p = p->Next;
                 }
-                while (p && f == p->TotalGrade && strcmp(a,p->sn2) > 0)//³É¼¨ÏàÍ¬Ôò°´ĞÕÃûÅÅĞò
+                while (p && f == p->TotalGrade && strcmp(a,p->sn2) > 0)//æˆç»©ç›¸åŒåˆ™æŒ‰å§“åæ’åº
                 {
                     pr = p;
                     p = p->Next;
@@ -187,13 +187,13 @@ struct menu2* Record_2 (struct menu2 *head,char *a,char *b,float c,float d,float
     return head;
 }
 
-/*²é¿´ËùÓĞÊı¾İº¯Êı*/
+/*æŸ¥çœ‹æ‰€æœ‰æ•°æ®å‡½æ•°*/
 struct menu2* Seeit_2  (struct menu2 *head)
 {
     system ("cls");
     struct menu2 *p = head;
-    printf ("\n\n\n\n\t----------------------******************Ñ§Éú³É¼¨²é¿´*********************--------------------\n\n\n");
-    printf ("\tÑ§ºÅ----------ĞÕÃû----------¸ßÊı³É¼¨--------Ó¢Óï³É¼¨--------CÓïÑÔ³ÌĞòÉè¼Æ³É¼¨--------×Ü³É¼¨(Æ½¾ù³É¼¨)\n\n");
+    printf ("\n\n\n\n\t----------------------******************å­¦ç”Ÿæˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+    printf ("\tå­¦å·----------å§“å----------é«˜æ•°æˆç»©--------è‹±è¯­æˆç»©--------Cè¯­è¨€ç¨‹åºè®¾è®¡æˆç»©--------æ€»æˆç»©(å¹³å‡æˆç»©)\n\n");
     while (p)
     {
         printf ("\t%-14s%-15s%-15.1f%-18.1f%-23.1f%-15.1f",p->sn2,p->name2,p->grade1,p->grade2,p->grade3,p->TotalGrade);
@@ -203,15 +203,15 @@ struct menu2* Seeit_2  (struct menu2 *head)
     return head;
 }
 
-/*É¾³ı½Úµãº¯Êı*/
-//flagÓÃÒÔ±ê¼ÇÉ¾³ıÊ§°ÜÇé¿ö£¬±ÜÃâ¶à´ÎÉ¾³ı
+/*åˆ é™¤èŠ‚ç‚¹å‡½æ•°*/
+//flagç”¨ä»¥æ ‡è®°åˆ é™¤å¤±è´¥æƒ…å†µï¼Œé¿å…å¤šæ¬¡åˆ é™¤
 struct menu2* Delete_2 (struct menu2 *head,char s[])
 {
     struct menu2 *p = head;
     if (!p)
     {
         flag = 1;
-        printf ("ÔİÎŞÊı¾İ!\n");
+        printf ("æš‚æ— æ•°æ®!\n");
         return NULL;
     }
     while (strcmp(p->sn2,s)!=0)
@@ -220,7 +220,7 @@ struct menu2* Delete_2 (struct menu2 *head,char s[])
         if (!p)
         {
             flag = 1;
-            printf ("¸ÃÉúÊı¾İ²»´æÔÚ£¬ÇëÖØÊÔ£¡\n");
+            printf ("è¯¥ç”Ÿæ•°æ®ä¸å­˜åœ¨ï¼Œè¯·é‡è¯•ï¼\n");
             return head;
         }
     }
@@ -247,8 +247,8 @@ struct menu2* Delete_2 (struct menu2 *head,char s[])
     return head;
 }
 
-/*²éÑ¯*/
-struct menu2* Find_2 (struct menu2 *head,int change,char c[])//CÓÃÒÔ±íÊ¾ĞÕÃû»òÕßÑ§ºÅ£¬È¡¾öÓÚchangeÊÇ·ñÎª6»¹ÊÇ4
+/*æŸ¥è¯¢*/
+struct menu2* Find_2 (struct menu2 *head,int change,char c[])//Cç”¨ä»¥è¡¨ç¤ºå§“åæˆ–è€…å­¦å·ï¼Œå–å†³äºchangeæ˜¯å¦ä¸º6è¿˜æ˜¯4
 {
     HideConsoleCursor();
     system("cls");
@@ -260,8 +260,8 @@ struct menu2* Find_2 (struct menu2 *head,int change,char c[])//CÓÃÒÔ±íÊ¾ĞÕÃû»òÕß
         {
             if (strcmp(p->sn2,c)==0)
             {
-                printf ("\n\n\n\n\t----------------------******************Ñ§Éú³É¼¨²é¿´*********************--------------------\n\n\n");
-                printf ("\tÑ§ºÅ----------ĞÕÃû----------¸ßÊı³É¼¨--------Ó¢Óï³É¼¨--------CÓïÑÔ³ÌĞòÉè¼Æ³É¼¨--------×Ü³É¼¨(Æ½¾ù³É¼¨)\n\n");
+                printf ("\n\n\n\n\t----------------------******************å­¦ç”Ÿæˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+                printf ("\tå­¦å·----------å§“å----------é«˜æ•°æˆç»©--------è‹±è¯­æˆç»©--------Cè¯­è¨€ç¨‹åºè®¾è®¡æˆç»©--------æ€»æˆç»©(å¹³å‡æˆç»©)\n\n");
                 printf ("\t%-14s%-15s%-15.1f%-18.1f%-23.1f%-15.1f",p->sn2,p->name2,p->grade1,p->grade2,p->grade3,p->TotalGrade);
                 printf ("\n");
                 return p;
@@ -270,15 +270,15 @@ struct menu2* Find_2 (struct menu2 *head,int change,char c[])//CÓÃÒÔ±íÊ¾ĞÕÃû»òÕß
                 //return Find_2(p->Next,4,c);
                 p=p->Next;
         }
-        printf ("¸ÃÑ§Éú²»´æÔÚ\n");
+        printf ("è¯¥å­¦ç”Ÿä¸å­˜åœ¨\n");
         break;
     case 6:
         while (p)
         {
             if (strcmp(p->name2,c)==0)
             {
-                printf ("\n\n\n\n\t----------------------******************Ñ§Éú³É¼¨²é¿´*********************--------------------\n\n\n");
-                printf ("\tÑ§ºÅ----------ĞÕÃû----------¸ßÊı³É¼¨--------Ó¢Óï³É¼¨--------CÓïÑÔ³ÌĞòÉè¼Æ³É¼¨--------×Ü³É¼¨(Æ½¾ù³É¼¨)\n\n");
+                printf ("\n\n\n\n\t----------------------******************å­¦ç”Ÿæˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+                printf ("\tå­¦å·----------å§“å----------é«˜æ•°æˆç»©--------è‹±è¯­æˆç»©--------Cè¯­è¨€ç¨‹åºè®¾è®¡æˆç»©--------æ€»æˆç»©(å¹³å‡æˆç»©)\n\n");
                 printf ("\t%-14s%-15s%-15.1f%-18.1f%-23.1f%-15.1f",p->sn2,p->name2,p->grade1,p->grade2,p->grade3,p->TotalGrade);
                 printf ("\n");
                 return p;
@@ -286,21 +286,21 @@ struct menu2* Find_2 (struct menu2 *head,int change,char c[])//CÓÃÒÔ±íÊ¾ĞÕÃû»òÕß
             else
                 p=p->Next;//return Find_2(p->Next,6,c);
         }
-        printf ("¸ÃÑ§Éú²»´æÔÚ\n");
+        printf ("è¯¥å­¦ç”Ÿä¸å­˜åœ¨\n");
         break;
     }
     return NULL;
 }
 
-/*²é¿´µ¥¿Æ³É¼¨*/
-void SeeThesingle_2  (struct menu2 *headofit,int choice)
+/*æŸ¥çœ‹å•ç§‘æˆç»©*/
+void SeeThesingle_2  (struct menu2 *headofit,int choice)//choiceè¡¨ç¤ºä¼ å…¥çš„ä¸åŒæˆç»©è¡¨å¤´
 {
     struct menu2 *head = headofit;
     switch(choice)
     {
     case 1:
-        printf ("\n\n\n\n\t----------------------******************Ñ§Éú¸ßÊı³É¼¨²é¿´*********************--------------------\n\n\n");
-        printf ("\t\t\t\t\tÑ§ºÅ----------ĞÕÃû----------¸ßÊı³É¼¨\n\n");
+        printf ("\n\n\n\n\t----------------------******************å­¦ç”Ÿé«˜æ•°æˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+        printf ("\t\t\t\t\tå­¦å·----------å§“å----------é«˜æ•°æˆç»©\n\n");
         while (head)
         {
             printf ("\t\t\t\t\t%-14s%-15s%-15.1f",head->sn2,head->name2,head->grade1);
@@ -309,8 +309,8 @@ void SeeThesingle_2  (struct menu2 *headofit,int choice)
         }
         break;
     case 2:
-        printf ("\n\n\n\n\t----------------------******************Ñ§ÉúÓ¢Óï³É¼¨²é¿´*********************--------------------\n\n\n");
-        printf ("\t\t\t\t\tÑ§ºÅ----------ĞÕÃû----------Ó¢Óï³É¼¨\n\n");
+        printf ("\n\n\n\n\t----------------------******************å­¦ç”Ÿè‹±è¯­æˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+        printf ("\t\t\t\t\tå­¦å·----------å§“å----------è‹±è¯­æˆç»©\n\n");
         while (head)
         {
             printf ("\t\t\t\t\t%-14s%-15s%-15.1f",head->sn2,head->name2,head->grade2);
@@ -319,8 +319,8 @@ void SeeThesingle_2  (struct menu2 *headofit,int choice)
         }
         break;
     case 3:
-        printf ("\n\n\n\n\t----------------------******************Ñ§ÉúCÓïÑÔ³É¼¨²é¿´*********************--------------------\n\n\n");
-        printf ("\t\t\t\t\tÑ§ºÅ----------ĞÕÃû----------CÓïÑÔ³É¼¨\n\n");
+        printf ("\n\n\n\n\t----------------------******************å­¦ç”ŸCè¯­è¨€æˆç»©æŸ¥çœ‹*********************--------------------\n\n\n");
+        printf ("\t\t\t\t\tå­¦å·----------å§“å----------Cè¯­è¨€æˆç»©\n\n");
         while (head)
         {
             printf ("\t\t\t\t\t%-14s%-15s%-15.1f",head->sn2,head->name2,head->grade3);
@@ -333,14 +333,14 @@ void SeeThesingle_2  (struct menu2 *headofit,int choice)
     return ;
 }
 
-/*½øÈë²é¿´µ¥¿Æ³É¼¨½Ó¿Ú*/
+/*è¿›å…¥æŸ¥çœ‹å•ç§‘æˆç»©æ¥å£*/
 void EnterSee2(struct menu2 *Mainhead,struct menu2 *head1,struct menu2 *head2,struct menu2 *head3)
 {
     char c;
 STA:
     HideConsoleCursor();
     system("cls");
-    printf ("Äú¿ÉÒÔÊäÈëÊı×Ö 1 ÒÔ²é¿´Ñ§Éú¸ßÊı³É¼¨£¬2 ÒÔ²é¿´Ñ§ÉúµÄÓ¢Óï³É¼¨£¬3 ÒÔ²é¿´CÓïÑÔ³É¼¨£¬5 ÒÔ·µ»Ø²Ëµ¥,0ÒÔË¢ĞÂµ±Ç°Ò³Ãæ\n");
+    printf ("æ‚¨å¯ä»¥è¾“å…¥æ•°å­— 1 ä»¥æŸ¥çœ‹å­¦ç”Ÿé«˜æ•°æˆç»©ï¼Œ2 ä»¥æŸ¥çœ‹å­¦ç”Ÿçš„è‹±è¯­æˆç»©ï¼Œ3 ä»¥æŸ¥çœ‹Cè¯­è¨€æˆç»©ï¼Œ5 ä»¥è¿”å›èœå•,0ä»¥åˆ·æ–°å½“å‰é¡µé¢\n");
     ShowConsoleCursor();
     while (1)
     {
@@ -350,15 +350,15 @@ STA:
         {
         case '1':
             SeeThesingle_2(head1,1);
-            printf ("²Ù×÷³É¹¦£¬Äú¿ÉÒÔ¼ÌĞø²Ù×÷£¡\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œæ‚¨å¯ä»¥ç»§ç»­æ“ä½œï¼\n");
             break;
         case '2':
             SeeThesingle_2(head2,2);
-            printf ("²Ù×÷³É¹¦£¬Äú¿ÉÒÔ¼ÌĞø²Ù×÷£¡\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œæ‚¨å¯ä»¥ç»§ç»­æ“ä½œï¼\n");
             break;
         case '3':
             SeeThesingle_2(head3,3);
-            printf ("²Ù×÷³É¹¦£¬Äú¿ÉÒÔ¼ÌĞø²Ù×÷£¡\n");
+            printf ("æ“ä½œæˆåŠŸï¼Œæ‚¨å¯ä»¥ç»§ç»­æ“ä½œï¼\n");
             break;
         case '0':
             goto STA;
@@ -366,14 +366,14 @@ STA:
         case '5':
             return ;
         default:
-            printf ("ÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë\n");
+            printf ("è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
             break;
         }
     }
     return ;
 }
 
-/*ĞŞ¸ÄÊı¾İ*/
+/*ä¿®æ”¹æ•°æ®*/
 struct menu2* Change_2 (struct menu2 *head, int choice,char sn[],char s[], float grade)
 {
     struct menu2 *p = head;
@@ -407,7 +407,7 @@ struct menu2* Change_2 (struct menu2 *head, int choice,char sn[],char s[], float
     return head;
 }
 
-/*³É¼¨±¨¸æº¯Êı*/
+/*æˆç»©æŠ¥å‘Šå‡½æ•°*/
 void CordReport_2(struct menu2 *mainhead,struct menu2 *head1,struct menu2 *head2,struct menu2 *head3)
 {
 Sta:
@@ -416,9 +416,9 @@ Sta:
     struct menu2 *p,*p1,*p2,*p3;
     float num1 = 0,num2 = 0,num3 = 0;
     char ch;
-    printf ("----------------------******************ÊäÈë5ÒÔ·µ»Ø²Ëµ¥£¬ÊäÈë0ÒÔË¢ĞÂÒ³Ãæ*********************--------------------\n");
-    printf ("----------------------******************ÊäÈë5ÒÔ·µ»Ø²Ëµ¥£¬ÊäÈë0ÒÔË¢ĞÂÒ³Ãæ*********************--------------------\n");
-    printf ("\t*Äú¿ÉÒÔÊäÈë 1 ÒÔ²é¿´Æ½¾ù³É¼¨±¨¸æ£¬2 ÒÔ²é¿´¸ßÊı³É¼¨±¨¸æ£¬3 ÒÔ²é¿´Ó¢Óï³É¼¨±¨¸æ£¬4 ÒÔ²é¿´CÓïÑÔ³É¼¨±¨¸æ* \n");
+    printf ("----------------------******************è¾“å…¥5ä»¥è¿”å›èœå•ï¼Œè¾“å…¥0ä»¥åˆ·æ–°é¡µé¢*********************--------------------\n");
+    printf ("----------------------******************è¾“å…¥5ä»¥è¿”å›èœå•ï¼Œè¾“å…¥0ä»¥åˆ·æ–°é¡µé¢*********************--------------------\n");
+    printf ("\t*æ‚¨å¯ä»¥è¾“å…¥ 1 ä»¥æŸ¥çœ‹å¹³å‡æˆç»©æŠ¥å‘Šï¼Œ2 ä»¥æŸ¥çœ‹é«˜æ•°æˆç»©æŠ¥å‘Šï¼Œ3 ä»¥æŸ¥çœ‹è‹±è¯­æˆç»©æŠ¥å‘Šï¼Œ4 ä»¥æŸ¥çœ‹Cè¯­è¨€æˆç»©æŠ¥å‘Š* \n");
     while (1)
     {
         p = mainhead;
@@ -435,8 +435,8 @@ Sta:
             goto Sta;
             break;
         case '1':
-            printf ("\t\t\t\t*Æ½¾ù³É¼¨±¨¸æ*\n\n\t\t\t\tÆ½¾ù³É¼¨ÔÚ90·Ö¼°ÒÔÉÏµÄÈË·Ö±ğÊÇ£¨Âú¼¨µãÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ----------ĞÕÃû-----------³É¼¨\n");
+            printf ("\t\t\t\t*å¹³å‡æˆç»©æŠ¥å‘Š*\n\n\t\t\t\tå¹³å‡æˆç»©åœ¨90åˆ†åŠä»¥ä¸Šçš„äººåˆ†åˆ«æ˜¯ï¼ˆæ»¡ç»©ç‚¹äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·----------å§“å-----------æˆç»©\n");
             while (p && p->TotalGrade >= 90)
             {
                 printf ("\n\t\t\t\t%-15s%-15s%.1f",p->sn2,p->name2,p->TotalGrade);
@@ -444,9 +444,9 @@ Sta:
                 num2++;
                 p = p->Next;
             }
-            if (num1 == 0)  printf("\t\t\t\tÄúµÄ°àÃ»ÓĞÂú¼¨ÈËÊ¿£¡");
-            printf ("\n\n\t\t\t\tÆ½¾ù³É¼¨ÔÚ60·ÖÒÔÏÂµÄÈË·Ö±ğÊÇ£¨¹Ò¿ÆÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ----------ĞÕÃû-----------³É¼¨\n");
+            if (num1 == 0)  printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æ»¡ç»©äººå£«ï¼");
+            printf ("\n\n\t\t\t\tå¹³å‡æˆç»©åœ¨60åˆ†ä»¥ä¸‹çš„äººåˆ†åˆ«æ˜¯ï¼ˆæŒ‚ç§‘äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·----------å§“å-----------æˆç»©\n");
             while (p)
             {
                 if (p->TotalGrade < 60)
@@ -457,15 +457,15 @@ Sta:
                 else num2++;
                 p = p->Next;
             }
-            if (num3 == 0)printf("\t\t\t\tÄúµÄ°àÃ»ÓĞ¹Ò¿ÆÈËÊ¿£¡");
+            if (num3 == 0)printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æŒ‚ç§‘äººå£«ï¼");
             if (num2+num3 != 0)
-                printf ("\n\n\t\t\t\t×ÜÌå·Ö²¼:\n\t\t\t\t60·ÖÒÔÏÂ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\t60·ÖÒÔÉÏ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\tÆäÖĞ90·ÖÒÔÉÏ¹²ÓĞ%.0fÈË,Õ¼±È%.1f%%¡£\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
+                printf ("\n\n\t\t\t\tæ€»ä½“åˆ†å¸ƒ:\n\t\t\t\t60åˆ†ä»¥ä¸‹å…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\t60åˆ†ä»¥ä¸Šå…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\tå…¶ä¸­90åˆ†ä»¥ä¸Šå…±æœ‰%.0fäºº,å æ¯”%.1f%%ã€‚\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
             else
-                printf ("\n\n\t\t\tÔİÎŞÊı¾İ£¡");
+                printf ("\n\n\t\t\tæš‚æ— æ•°æ®ï¼");
             break;
         case '2':
-            printf ("\t\t\t\t*¸ßÊı³É¼¨±¨¸æ*\n\n\t\t\t\t¸ßÊı³É¼¨ÔÚ90·Ö¼°ÒÔÉÏµÄÈË·Ö±ğÊÇ£¨Âú¼¨µãÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            printf ("\t\t\t\t*é«˜æ•°æˆç»©æŠ¥å‘Š*\n\n\t\t\t\té«˜æ•°æˆç»©åœ¨90åˆ†åŠä»¥ä¸Šçš„äººåˆ†åˆ«æ˜¯ï¼ˆæ»¡ç»©ç‚¹äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p1 && p1->grade1 >= 90)
             {
                 printf ("\n\t\t\t\t%-15s%-15s%.1f",p1->sn2,p1->name2,p1->grade1);
@@ -473,9 +473,9 @@ Sta:
                 num2++;
                 p1 = p1->Next;
             }
-            if (num1 == 0)  printf("\t\t\t\tÄúµÄ°àÃ»ÓĞÂú¼¨ÈËÊ¿£¡");
-            printf ("\n\n\t\t\t\t¸ßÊı³É¼¨ÔÚ60·ÖÒÔÏÂµÄÈË·Ö±ğÊÇ£¨¹Ò¿ÆÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            if (num1 == 0)  printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æ»¡ç»©äººå£«ï¼");
+            printf ("\n\n\t\t\t\té«˜æ•°æˆç»©åœ¨60åˆ†ä»¥ä¸‹çš„äººåˆ†åˆ«æ˜¯ï¼ˆæŒ‚ç§‘äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p1)
             {
                 if (p1->grade1 < 60)
@@ -486,15 +486,15 @@ Sta:
                 else num2++;
                 p1 = p1->Next;
             }
-            if (num3 == 0) printf("\t\t\t\tÄúµÄ°àÃ»ÓĞ¹Ò¿ÆÈËÊ¿£¡");
+            if (num3 == 0) printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æŒ‚ç§‘äººå£«ï¼");
             if (num2+num3 != 0)
-                printf ("\n\n\t\t\t\t×ÜÌå·Ö²¼:\n\t\t\t\t60·ÖÒÔÏÂ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\t60·ÖÒÔÉÏ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\tÆäÖĞ90·ÖÒÔÉÏ¹²ÓĞ%.0fÈË,Õ¼±È%.1f%%¡£\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
+                printf ("\n\n\t\t\t\tæ€»ä½“åˆ†å¸ƒ:\n\t\t\t\t60åˆ†ä»¥ä¸‹å…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\t60åˆ†ä»¥ä¸Šå…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\tå…¶ä¸­90åˆ†ä»¥ä¸Šå…±æœ‰%.0fäºº,å æ¯”%.1f%%ã€‚\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
             else
-                printf ("\n\n\t\t\t\tÔİÎŞÊı¾İ£¡");
+                printf ("\n\n\t\t\t\tæš‚æ— æ•°æ®ï¼");
             break;
         case '3':
-            printf ("\t\t\t\t*Ó¢Óï³É¼¨±¨¸æ*\n\n\t\t\t\tÓ¢Óï³É¼¨ÔÚ90·Ö¼°ÒÔÉÏµÄÈË·Ö±ğÊÇ£¨Âú¼¨µãÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            printf ("\t\t\t\t*è‹±è¯­æˆç»©æŠ¥å‘Š*\n\n\t\t\t\tè‹±è¯­æˆç»©åœ¨90åˆ†åŠä»¥ä¸Šçš„äººåˆ†åˆ«æ˜¯ï¼ˆæ»¡ç»©ç‚¹äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p2 && p2->grade2 >= 90)
             {
                 printf ("\n\t\t\t\t%-15s%-15s%.1f",p2->sn2,p2->name2,p2->grade2);
@@ -502,9 +502,9 @@ Sta:
                 num2++;
                 p2 = p2->Next;
             }
-            if (num1 == 0)  printf("\t\t\t\tÄúµÄ°àÃ»ÓĞÂú¼¨ÈËÊ¿£¡");
-            printf ("\n\n\t\t\t\tÓ¢Óï³É¼¨ÔÚ60·ÖÒÔÏÂµÄÈË·Ö±ğÊÇ£¨¹Ò¿ÆÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            if (num1 == 0)  printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æ»¡ç»©äººå£«ï¼");
+            printf ("\n\n\t\t\t\tè‹±è¯­æˆç»©åœ¨60åˆ†ä»¥ä¸‹çš„äººåˆ†åˆ«æ˜¯ï¼ˆæŒ‚ç§‘äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p2)
             {
                 if (p2->grade2 < 60)
@@ -515,15 +515,15 @@ Sta:
                 else num2++;
                 p2 = p2->Next;
             }
-            if (num3 == 0) printf("\t\t\t\tÄúµÄ°àÃ»ÓĞ¹Ò¿ÆÈËÊ¿£¡");
+            if (num3 == 0) printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æŒ‚ç§‘äººå£«ï¼");
             if (num2 + num3 != 0)
-                printf ("\n\n\t\t\t\t×ÜÌå·Ö²¼£º\n\t\t\t\t60·ÖÒÔÏÂ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\t60·ÖÒÔÉÏ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\tÆäÖĞ90·ÖÒÔÉÏ¹²ÓĞ%.0fÈË,Õ¼±È%.1f%%¡£\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
+                printf ("\n\n\t\t\t\tæ€»ä½“åˆ†å¸ƒï¼š\n\t\t\t\t60åˆ†ä»¥ä¸‹å…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\t60åˆ†ä»¥ä¸Šå…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\tå…¶ä¸­90åˆ†ä»¥ä¸Šå…±æœ‰%.0fäºº,å æ¯”%.1f%%ã€‚\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
             else
-                printf ("\n\n\t\t\tÔİÎŞÊı¾İ£¡");
+                printf ("\n\n\t\t\tæš‚æ— æ•°æ®ï¼");
             break;
         case '4':
-            printf ("\t\t\t\t*C³É¼¨±¨¸æ*\n\n\t\t\t\tC³É¼¨ÔÚ90·Ö¼°ÒÔÉÏµÄÈË·Ö±ğÊÇ£¨Âú¼¨µãÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            printf ("\t\t\t\t*Cæˆç»©æŠ¥å‘Š*\n\n\t\t\t\tCæˆç»©åœ¨90åˆ†åŠä»¥ä¸Šçš„äººåˆ†åˆ«æ˜¯ï¼ˆæ»¡ç»©ç‚¹äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p3 && p3->grade3 >= 90)
             {
                 printf ("\n\t\t\t\t%-15s%-15s%.1f",p3->sn2,p3->name2,p3->grade3);
@@ -531,9 +531,9 @@ Sta:
                 num2++;
                 p3 = p3->Next;
             }
-            if (num1 == 0)  printf("\t\t\t\tÄúµÄ°àÃ»ÓĞÂú¼¨ÈËÊ¿£¡");
-            printf ("\n\n\t\t\t\tC³É¼¨ÔÚ60·ÖÒÔÏÂµÄÈË·Ö±ğÊÇ£¨¹Ò¿ÆÈËÊ¿£©:\n");
-            printf ("\t\t\t\tÑ§ºÅ---------ĞÕÃû----------³É¼¨\n");
+            if (num1 == 0)  printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æ»¡ç»©äººå£«ï¼");
+            printf ("\n\n\t\t\t\tCæˆç»©åœ¨60åˆ†ä»¥ä¸‹çš„äººåˆ†åˆ«æ˜¯ï¼ˆæŒ‚ç§‘äººå£«ï¼‰:\n");
+            printf ("\t\t\t\tå­¦å·---------å§“å----------æˆç»©\n");
             while (p3)
             {
                 if (p3->grade3 < 60)
@@ -544,16 +544,16 @@ Sta:
                 else num2++;
                 p3 = p3->Next;
             }
-            if (num3 == 0) printf("\t\t\t\tÄúµÄ°àÃ»ÓĞ¹Ò¿ÆÈËÊ¿£¡");
+            if (num3 == 0) printf("\t\t\t\tæ‚¨çš„ç­æ²¡æœ‰æŒ‚ç§‘äººå£«ï¼");
             if (num2 + num3 != 0)
-                printf ("\n\n\t\t\t\t×ÜÌå·Ö²¼£º\n\t\t\t\t60·ÖÒÔÏÂ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\t60·ÖÒÔÉÏ¹²ÓĞ%.0fÈË£¬Õ¼±È%.1f%%¡£\n\n\t\t\t\tÆäÖĞ90·ÖÒÔÉÏ¹²ÓĞ%.0fÈË,Õ¼±È%.1f%%¡£\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
+                printf ("\n\n\t\t\t\tæ€»ä½“åˆ†å¸ƒï¼š\n\t\t\t\t60åˆ†ä»¥ä¸‹å…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\t60åˆ†ä»¥ä¸Šå…±æœ‰%.0fäººï¼Œå æ¯”%.1f%%ã€‚\n\n\t\t\t\tå…¶ä¸­90åˆ†ä»¥ä¸Šå…±æœ‰%.0fäºº,å æ¯”%.1f%%ã€‚\n\n",num3,(float)num3/(num2+num3)*100.0,num2,(float)num2/(num2+num3)*100.0,num1,(float)num1/(num2+num3)*100.0);
             else
-                printf ("\n\n\t\t\tÔİÎŞÊı¾İ£¡");
+                printf ("\n\n\t\t\tæš‚æ— æ•°æ®ï¼");
             break;
         case '5':
             return ;
         default:
-            printf ("ÄúµÄÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë£¡\n");
+            printf ("æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
         }
     }
     return ;
